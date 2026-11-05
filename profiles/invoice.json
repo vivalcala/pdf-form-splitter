@@ -1,0 +1,14 @@
+{
+  "name": "invoice",
+  "description": "Vendor invoices; an invoice can span several pages until the next invoice number.",
+  "split_mode": "by_id",
+  "id_field": "invoice",
+  "required": ["invoice", "vendor"],
+  "filename": "{date}_{vendor}_{invoice}",
+  "fields": {
+    "invoice": {"regex": "Invoice\\s*(?:No\\.?|#|Number)\\s*:?\\s*([A-Z0-9-]{3,})", "transform": "upper"},
+    "vendor": {"regex": "^From\\s*:\\s*(.+)$", "transform": "title"},
+    "date": {"regex": "Invoice\\s*Date\\s*:?\\s*(\\d{1,2}/\\d{1,2}/\\d{4})", "transform": "date_iso"},
+    "total": {"regex": "Total\\s*Due\\s*:?\\s*\\$?\\s*([\\d,]+\\.\\d{2})", "transform": "money"}
+  }
+}

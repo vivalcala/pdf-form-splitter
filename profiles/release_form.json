@@ -1,0 +1,20 @@
+{
+  "name": "release_form",
+  "description": "One-page release forms; one case per page.",
+  "split_mode": "per_page",
+  "id_field": "caseId",
+  "required": ["caseId", "name"],
+  "filename": "{caseId}_{name}",
+  "fields": {
+    "caseId": {"regex": "PIP\\s*#?\\s*:?\\s*([PA]\\d{4}-\\d{3,5})", "transform": "pad_id", "options": {"width": 5}},
+    "name": {"regex": "Decedent\\s*:\\s*(.+?)\\s*(?:PIP\\s*#|$)", "transform": "name_last_first"},
+    "facility": {
+      "regex": "^(.+)\\s*\\n\\s*Requesting\\s*Facility",
+      "transform": "match_list",
+      "options": {"items": ["Riverside General Hospital", "Bayview Medical Center", "Coastal Memorial Hospital"]}
+    },
+    "releaseDate": {"regex": "\\bDate\\s*:\\s*(\\d{1,2}/\\d{1,2}/\\d{4})", "transform": "date_iso"},
+    "dob": {"regex": "Date\\s*of\\s*Birth\\s*:?\\s*(\\d{1,2}/\\d{1,2}/\\d{4})", "transform": "date_iso"},
+    "dod": {"regex": "Date\\s*of\\s*Death\\s*:?\\s*(\\d{1,2}/\\d{1,2}/\\d{4})", "transform": "date_iso"}
+  }
+}
