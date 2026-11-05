@@ -1,0 +1,5 @@
+# Never commit real documents or generated output
+input_pdf/
+processed_archive/
+output/
+__pycache__/

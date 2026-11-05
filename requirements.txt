@@ -1,0 +1,4 @@
+pypdf
+pypdfium2
+rapidocr-onnxruntime
+numpy
